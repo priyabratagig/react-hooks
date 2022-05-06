@@ -4,17 +4,15 @@ export class StateCounterClass extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
+            ids: [],
         };
     }
     render() {
         return (
             <div>
-                {/* need to copy the object to then assign updates */}
-                <input type="name" value={this.state.firstName} onChange={(e) => { this.setState({ ...this.state, firstName: e.target.value }) }} />
-                <input type="name" value={this.state.lastName} onChange={(e) => { this.setState({ ...this.state, lastName: e.target.value }) }} />
-                <p>{JSON.stringify(this.state)}</p>
+                {/* need to copy the array and assign updates */}
+                <button onClick={() => this.setState({ ids: [...this.state.ids, { id: this.state.ids.length, value: Math.floor(Math.random(10) + 1) }] })}>Add Item</button>
+                {this.state.ids.map(ele => (<p key={ele.id}>{ele.id} - {ele.value}</p>))}
             </div>
         )
     }

@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
 function StateCounterFunctional() {
-    const [state, setState] = useState({ firstName: '', lastName: '' });
+    const [state, setState] = useState([]);
     return (
         <div>
-            {/* need to copy the object and assign updates */}
-            <input type="name" value={state.firstName} onChange={(e) => { setState({ ...state, firstName: e.target.value }) }} />
-            <input type="name" value={state.lastName} onChange={(e) => { setState({ ...state, lastName: e.target.value }) }} />
-            <p>{JSON.stringify(state)}</p>
+            {/* need to copy the array and assign updates */}
+            <button onClick={() => setState([...state, { id: state.length, value: Math.floor(Math.random(10) + 1) }])}>Add Item</button>
+            {state.map(ele => (<p key={ele.id}>{ele.id} - {ele.value}</p>))}
         </div>
     )
 }
