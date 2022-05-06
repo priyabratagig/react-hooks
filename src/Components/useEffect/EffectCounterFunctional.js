@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
 function EffectCounterFunctional() {
-    const [counter, setCounter] = useState(0);
-    const [name, setName] = useState('');
+    const [coOrdinates, setCoOrdinates] = useState({ x: 0, y: 0 });
+    const logMouse = ({ clientX = 0, clientY = 0 }) => {
+        setCoOrdinates({ x: clientX, y: clientY });
+    };
     useEffect(() => {
-        console.log('Document title updated')
-        document.title = `Function Clicked ${counter}`
-    }, [counter]); //run effect with condition
+        console.log('AddEventListener');
+        window.addEventListener('mousemove', logMouse)
+    }, []); //run only once
     return (
         <div>
-            <p>EffectCounterFunctional</p>
-            <input type="name" value={name} onChange={({ target: { value } }) => setName(value)} />
-            <button onClick={() => setCounter(counter + 1)}>Clicked {counter}</button>
+            <p>EffectCounterFunctional Mouse Moved - {JSON.stringify(coOrdinates)}</p>
         </div>
     )
 }

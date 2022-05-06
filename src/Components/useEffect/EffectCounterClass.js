@@ -4,25 +4,21 @@ export class EffectCounterClass extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0,
-            name: '',
+            x: 0,
+            y: 0,
         };
     }
-    componentDidMount() {
-        document.title = `Class Clicked ${this.state.count}` //same code writen twice
+    logMouse = ({ clientX = 0, clientY = 0 }) => {
+        this.setState({ x: clientX, y: clientY })
     };
-    componentDidUpdate(previousProps, previousState) {
-        if (previousState.count !== this.state.count) { //run side effect with condition
-            console.log('Document title updated')
-            document.title = `Class Clicked ${this.state.count}` //same code writen twice
-        }
-    }
+    componentDidMount() {
+        console.log('AddEventListener');
+        window.addEventListener('mousemove', this.logMouse); //only need to be executed once
+    };
     render() {
         return (
             <div>
-                <p>EffectCounterClass</p>
-                <input type="name" value={this.state.name} onChange={({ target: { value } }) => this.setState({ ...this.state, name: value })} />
-                <button onClick={() => this.setState({ count: this.state.count + 1 })}>Cliked {this.state.count}</button>
+                <p>EffectCounterClass Mouse Moved - {JSON.stringify(this.state)}</p>
             </div>
         )
     }
