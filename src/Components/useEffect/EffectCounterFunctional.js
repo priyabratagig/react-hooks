@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react'
 
 function EffectCounterFunctional() {
-    const [coOrdinates, setCoOrdinates] = useState({ x: 0, y: 0 });
-    const logMouse = ({ clientX = 0, clientY = 0 }) => {
-        console.log('functional mouse moved');
-        setCoOrdinates({ x: clientX, y: clientY });
-    };
+    const [count, setCount] = useState(0);
+    // const updateCount = () => {
+    //     setCount(count + 1);
+    //     // setCount(count => count + 1); solution-2
+    // };
     useEffect(() => {
-        console.log('AddEventListener');
-        window.addEventListener('mousemove', logMouse)
-        return () => { //funtion will run before unmount or useEffect re-run
-            window.removeEventListener('mousemove', logMouse);
+        const updateCount = () => {
+            setCount(count + 1);
+            // whenever need to call a function inside useEffect define it inside useEffect, that way don't forget to keep track of props and states dependency
+        };
+        const interval = setInterval(updateCount, 1000);
+        return () => {
+            clearInterval(interval);
         }
-    }, []); //run only once
+    }, [count]); //run only once
+    // useEff with empty dependency
+    // will run once and don't watch changes any veriable
+    // at re-render count is changed and upCount's count rfferencing old count
+    // Dependency array is not to when re-run the effect, instade let react know everything that effect must watch for changes
     return (
         <div>
-            <p>EffectCounterFunctional Mouse Moved - {JSON.stringify(coOrdinates)}</p>
+            <p>EffectCounterFunctional Count - {count}</p>
         </div>
     )
 }

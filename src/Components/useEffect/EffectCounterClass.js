@@ -4,26 +4,22 @@ export class EffectCounterClass extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            x: 0,
-            y: 0,
+            count: 0,
         };
-    }
-    logMouse = ({ clientX = 0, clientY = 0 }) => {
-        console.log('class mouse moved');
-        this.setState({ x: clientX, y: clientY })
+    };
+    updateCount = () => {
+        this.setState({ count: this.state.count + 1 })
     };
     componentDidMount() {
-        console.log('AddEventListener');
-        window.addEventListener('mousemove', this.logMouse); //only need to be executed once
+        this.interval = setInterval(this.updateCount, 1000)
     };
     componentWillUnmount() {
-        //will run before unmount
-        window.removeEventListener('mousemove', this.logMouse);
-    };
+        clearInterval(this.interval);
+    }
     render() {
         return (
             <div>
-                <p>EffectCounterClass Mouse Moved - {JSON.stringify(this.state)}</p>
+                <p>EffectCounterClass Count -  {this.state.count}</p>
             </div>
         )
     }
