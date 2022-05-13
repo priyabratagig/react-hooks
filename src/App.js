@@ -5,8 +5,9 @@ import './App.css';
 // import EffectCounterFunctional from './Components/useEffect/EffectCounterFunctional';
 // import EffectMouseContainerClass from './Components/useEffect/EffectMouseContainerClass';
 // import EffectMouseContainerFunctional from './Components/useEffect/EffectMouseContainerFunctional';
-import { NameContextProvider, HobbyContextProvider } from './Components/useContext/ContextStore';
-import ContextChild1 from './Components/useContext/ContextChild1';
+// import { NameContextProvider, HobbyContextProvider } from './Components/useContext/ContextStore';
+// import ContextChild1 from './Components/useContext/ContextChild1';
+import ReducerCounter from './Components/useReducer/ReducerCounter';
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -19,11 +20,12 @@ function App() {
       {/* <EffectCounterFunctional /> */}
       {/* <EffectMouseContainerClass /> */}
       {/* <EffectMouseContainerFunctional /> */}
-      <NameContextProvider>
+      {/* <NameContextProvider>
         <HobbyContextProvider>
           <ContextChild1 />
         </HobbyContextProvider>
-      </NameContextProvider>
+      </NameContextProvider> */}
+      <ReducerCounter />
     </div>
   );
 }
