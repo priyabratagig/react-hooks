@@ -1,37 +1,48 @@
-import React, { useReducer } from 'react'
+import axios from 'axios';
+import React, { useEffect, useReducer } from 'react'
 //useReducer is used for state management
 //useState is built with useReducer
-//when dealing multiple state variable with same state transition, good to use multiple useReducer
-const initialState = 0;
-const INCREMENT = 'INCREMENT'
-const DECREMENT = 'DECREMENT'
-const RESET = 'RESET'
+const initialState = {
+    loading: false,
+    post: { id: '' },
+    error: '',
+};
+const REQUESTED = 'REQUESTED'
+const REQUEST_FAILED = 'REQUEST_FAILED'
+const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
 const reducer = (state, action) => {
-    switch (action) {
-        case INCREMENT:
-            return state + 1;
-        case DECREMENT:
-            return state - 1;
-        case RESET:
-            return initialState;
+    switch (action.type) {
+        case REQUESTED:
+            return { error: '', loading: true, post: { id: action.payload } };
+        case REQUEST_FAILED:
+            return { ...initialState, error: action.payload, post: { id: state.post.id } };
+        case REQUEST_SUCCESS:
+            return { ...initialState, post: action.payload };
         default:
-            return state;
+            return { ...state };
     };
 }
 function ReducerCounter() {
-    const [firstCount, dispatchFirst] = useReducer(reducer, initialState);
-    const [secondCount, dispatchSecond] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
+    useEffect(() => {
+        if (state.post.id === '') return;
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${state.post.id}`)
+            .then((response) => dispatch({ type: REQUEST_SUCCESS, payload: response.data }))
+            .catch(({ message }) => dispatch({ type: REQUEST_FAILED, payload: message }));
+    }, [state.post.id]);
     return (
         <div>
             <p>ReducerCounter</p>
-            <p>Count - {firstCount}</p>
-            <button onClick={() => dispatchFirst(INCREMENT)}>Increment</button>
-            <button onClick={() => dispatchFirst(DECREMENT)}>Decrement</button>
-            <button onClick={() => dispatchFirst(RESET)}>Reset</button>
-            <p>Second-Count - {secondCount}</p>
-            <button onClick={() => dispatchSecond(INCREMENT)}>Increment</button>
-            <button onClick={() => dispatchSecond(DECREMENT)}>Decrement</button>
-            <button onClick={() => dispatchSecond(RESET)}>Reset</button>
+            <input type="number" value={state.post.id} onChange={({ target: { value } }) => dispatch({ type: REQUESTED, payload: value })} />
+            {state.loading ?
+                <p>...loading</p> :
+                state.error === '' ? (
+                    <>
+                        <p>Post Title: {state.post.title}</p>
+                        <p>Post body: {state.post.body}</p>
+                    </>
+                ) :
+                    <p>Error: {state.error}</p>}
         </div>
     )
 }
