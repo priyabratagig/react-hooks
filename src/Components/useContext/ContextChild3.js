@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { nameContext, hobbyContext } from './ContextStore'
 function ContextChild3() {
-    const valueName = useContext(nameContext);
-    const valueHobby = useContext(hobbyContext);
+    const [name, setName] = useContext(nameContext);
+    const [hobby, setHobby] = useContext(hobbyContext);
     return (
         <div>
             ContextChild3
-            <p>My name is {valueName}, I'm {valueHobby}</p>
+            <p>My name is {name}, I'm {hobby}</p>
+            <input type="name" value={name} onChange={({ target: { value } }) => { setName(value) }} />
+            <input type="text" value={hobby} onChange={({ target: { value } }) => { setHobby(value) }} />
         </div>
     )
 }

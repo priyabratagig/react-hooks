@@ -5,7 +5,7 @@ import './App.css';
 // import EffectCounterFunctional from './Components/useEffect/EffectCounterFunctional';
 // import EffectMouseContainerClass from './Components/useEffect/EffectMouseContainerClass';
 // import EffectMouseContainerFunctional from './Components/useEffect/EffectMouseContainerFunctional';
-import { nameContext, hobbyContext } from './Components/useContext/ContextStore';
+import { NameContextProvider, HobbyContextProvider } from './Components/useContext/ContextStore';
 import ContextChild1 from './Components/useContext/ContextChild1';
 
 // only call hook within react functional components at the top level
@@ -19,11 +19,11 @@ function App() {
       {/* <EffectCounterFunctional /> */}
       {/* <EffectMouseContainerClass /> */}
       {/* <EffectMouseContainerFunctional /> */}
-      <nameContext.Provider value={'Priyabrata'}>
-        <hobbyContext.Provider value={'Frontend Developer'}>
+      <NameContextProvider>
+        <HobbyContextProvider>
           <ContextChild1 />
-        </hobbyContext.Provider>
-      </nameContext.Provider>
+        </HobbyContextProvider>
+      </NameContextProvider>
     </div>
   );
 }
