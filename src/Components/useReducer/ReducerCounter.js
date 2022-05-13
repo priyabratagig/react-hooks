@@ -1,20 +1,32 @@
 import React, { useReducer } from 'react'
 //useReducer is used for state management
 //useState is built with useReducer
-const initialState = 0;
-const INCREMENT = 'INCREMENT'
-const DECREMENT = 'DECREMENT'
-const RESET = 'RESET'
+const initialState = {
+    firstCounter: 0,
+    secondCounter: 0,
+};
+const INCREMENT_FIRST = 'INCREMENT_FIRST'
+const DECREMENT_FIRST = 'DECREMENT_FIRST'
+const RESET_FIRST = 'RESET_FIRST'
+const INCREMENT_SECOND = 'INCREMENT_SECOND'
+const DECREMENT_SECOND = 'DECREMENT_SECOND'
+const RESET_SECOND = 'RESET_SECOND'
 const reducer = (state, action) => {
-    switch (action) {
-        case INCREMENT:
-            return state + 1;
-        case DECREMENT:
-            return state - 1;
-        case RESET:
-            return initialState;
+    switch (action.type) {
+        case INCREMENT_FIRST:
+            return { ...state, firstCounter: state.firstCounter + action.value };
+        case DECREMENT_FIRST:
+            return { ...state, firstCounter: state.firstCounter - action.value };
+        case RESET_FIRST:
+            return { ...state, firstCounter: initialState.firstCounter };
+        case INCREMENT_SECOND:
+            return { ...state, secondCounter: state.secondCounter + action.value };
+        case DECREMENT_SECOND:
+            return { ...state, secondCounter: state.secondCounter - action.value };
+        case RESET_SECOND:
+            return { ...state, secondCounter: initialState.secondCounter };
         default:
-            return state;
+            return { ...state };
     };
 }
 function ReducerCounter() {
@@ -22,10 +34,14 @@ function ReducerCounter() {
     return (
         <div>
             <p>ReducerCounter</p>
-            <p>Count - {count}</p>
-            <button onClick={() => dispatch(INCREMENT)}>Increment</button>
-            <button onClick={() => dispatch(DECREMENT)}>Decrement</button>
-            <button onClick={() => dispatch(RESET)}>Reset</button>
+            <p>First-Count - {count.firstCounter}</p>
+            <button onClick={() => dispatch({ type: INCREMENT_FIRST, value: 1 })}>Increment</button>
+            <button onClick={() => dispatch({ type: DECREMENT_FIRST, value: 1 })}>Decrement</button>
+            <button onClick={() => dispatch({ type: RESET_FIRST })}>Reset</button>
+            <p>Second-Count - {count.secondCounter}</p>
+            <button onClick={() => dispatch({ type: INCREMENT_SECOND, value: 1 })}>Increment</button>
+            <button onClick={() => dispatch({ type: DECREMENT_SECOND, value: 1 })}>Decrement</button>
+            <button onClick={() => dispatch({ type: RESET_SECOND })}>Reset</button>
         </div>
     )
 }
