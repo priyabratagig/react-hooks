@@ -3,8 +3,10 @@ import './App.css';
 // import StateCounterFunctional from './Components/useState/StateCounterFunctional';
 // import EffectCounterClass from './Components/useEffect/EffectCounterClass';
 // import EffectCounterFunctional from './Components/useEffect/EffectCounterFunctional';
-import EffectMouseContainerClass from './Components/useEffect/EffectMouseContainerClass';
-import EffectMouseContainerFunctional from './Components/useEffect/EffectMouseContainerFunctional';
+// import EffectMouseContainerClass from './Components/useEffect/EffectMouseContainerClass';
+// import EffectMouseContainerFunctional from './Components/useEffect/EffectMouseContainerFunctional';
+import { nameContext, hobbyContext } from './Components/useContext/ContextStore';
+import ContextChild1 from './Components/useContext/ContextChild1';
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -15,8 +17,13 @@ function App() {
       {/* <StateCounterFunctional /> */}
       {/* <EffectCounterClass /> */}
       {/* <EffectCounterFunctional /> */}
-      <EffectMouseContainerClass />
-      <EffectMouseContainerFunctional />
+      {/* <EffectMouseContainerClass /> */}
+      {/* <EffectMouseContainerFunctional /> */}
+      <nameContext.Provider value={'Priyabrata'}>
+        <hobbyContext.Provider value={'Frontend Developer'}>
+          <ContextChild1 />
+        </hobbyContext.Provider>
+      </nameContext.Provider>
     </div>
   );
 }
