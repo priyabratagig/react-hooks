@@ -1,47 +1,37 @@
 import React, { useReducer } from 'react'
 //useReducer is used for state management
 //useState is built with useReducer
-const initialState = {
-    firstCounter: 0,
-    secondCounter: 0,
-};
-const INCREMENT_FIRST = 'INCREMENT_FIRST'
-const DECREMENT_FIRST = 'DECREMENT_FIRST'
-const RESET_FIRST = 'RESET_FIRST'
-const INCREMENT_SECOND = 'INCREMENT_SECOND'
-const DECREMENT_SECOND = 'DECREMENT_SECOND'
-const RESET_SECOND = 'RESET_SECOND'
+//when dealing multiple state variable with same state transition, good to use multiple useReducer
+const initialState = 0;
+const INCREMENT = 'INCREMENT'
+const DECREMENT = 'DECREMENT'
+const RESET = 'RESET'
 const reducer = (state, action) => {
-    switch (action.type) {
-        case INCREMENT_FIRST:
-            return { ...state, firstCounter: state.firstCounter + action.value };
-        case DECREMENT_FIRST:
-            return { ...state, firstCounter: state.firstCounter - action.value };
-        case RESET_FIRST:
-            return { ...state, firstCounter: initialState.firstCounter };
-        case INCREMENT_SECOND:
-            return { ...state, secondCounter: state.secondCounter + action.value };
-        case DECREMENT_SECOND:
-            return { ...state, secondCounter: state.secondCounter - action.value };
-        case RESET_SECOND:
-            return { ...state, secondCounter: initialState.secondCounter };
+    switch (action) {
+        case INCREMENT:
+            return state + 1;
+        case DECREMENT:
+            return state - 1;
+        case RESET:
+            return initialState;
         default:
-            return { ...state };
+            return state;
     };
 }
 function ReducerCounter() {
-    const [count, dispatch] = useReducer(reducer, initialState);
+    const [firstCount, dispatchFirst] = useReducer(reducer, initialState);
+    const [secondCount, dispatchSecond] = useReducer(reducer, initialState);
     return (
         <div>
             <p>ReducerCounter</p>
-            <p>First-Count - {count.firstCounter}</p>
-            <button onClick={() => dispatch({ type: INCREMENT_FIRST, value: 1 })}>Increment</button>
-            <button onClick={() => dispatch({ type: DECREMENT_FIRST, value: 1 })}>Decrement</button>
-            <button onClick={() => dispatch({ type: RESET_FIRST })}>Reset</button>
-            <p>Second-Count - {count.secondCounter}</p>
-            <button onClick={() => dispatch({ type: INCREMENT_SECOND, value: 1 })}>Increment</button>
-            <button onClick={() => dispatch({ type: DECREMENT_SECOND, value: 1 })}>Decrement</button>
-            <button onClick={() => dispatch({ type: RESET_SECOND })}>Reset</button>
+            <p>Count - {firstCount}</p>
+            <button onClick={() => dispatchFirst(INCREMENT)}>Increment</button>
+            <button onClick={() => dispatchFirst(DECREMENT)}>Decrement</button>
+            <button onClick={() => dispatchFirst(RESET)}>Reset</button>
+            <p>Second-Count - {secondCount}</p>
+            <button onClick={() => dispatchSecond(INCREMENT)}>Increment</button>
+            <button onClick={() => dispatchSecond(DECREMENT)}>Decrement</button>
+            <button onClick={() => dispatchSecond(RESET)}>Reset</button>
         </div>
     )
 }
