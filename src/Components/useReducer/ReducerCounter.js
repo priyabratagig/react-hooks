@@ -2,6 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
 //useReducer is used for state management
 //useState is built with useReducer
+// when to use useState vs useReducer
+//Scenario  | useState    | useReducer
+// type-of-state    |   premetive   |   object
+// related-state-transition |   one/two |   many
+// bussiness-logic  |   no-bussiness-logic   |  complex-logic
+// local-vs-global |    local    |  global
 const initialState = {
     loading: false,
     post: { id: '' },
