@@ -1,16 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { nameContext, hobbyContext } from './ContextStore'
 function ContextChild3() {
+    const valueName = useContext(nameContext);
+    const valueHobby = useContext(hobbyContext);
     return (
         <div>
             ContextChild3
-            <nameContext.Consumer>
-                {(valueName) => {
-                    return (<hobbyContext.Consumer>
-                        {(valueHobby) => <p>My name is {valueName}, I'm {valueHobby}</p>}
-                    </hobbyContext.Consumer>)
-                }}
-            </nameContext.Consumer>
+            <p>My name is {valueName}, I'm {valueHobby}</p>
         </div>
     )
 }
