@@ -15,6 +15,7 @@ import './App.css';
 // import ParentComponent from './Components/useCallback/ParentComponent';
 // import MemoFunctionalComponent from './Components/useMemo/MemoFunctionalComponent';
 import RefFunctionalComponent from './Components/useRef/RefFunctionalComponent';
+import RefClassComponent from './Components/useRef/RefClassComponent';
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -41,6 +42,7 @@ function App() {
       {/* <ParentComponent /> */}
       {/* <MemoFunctionalComponent /> */}
       <RefFunctionalComponent />
+      <RefClassComponent />
     </div>
   );
 }

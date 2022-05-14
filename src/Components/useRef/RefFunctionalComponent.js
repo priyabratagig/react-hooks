@@ -1,14 +1,17 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function RefFunctionalComponent() {
-    const inputRef = useRef(null);
+    const [count, setCount] = useState(0);
+    const interval = useRef(undefined);
     useEffect(() => {
-        inputRef.current.focus();
+        interval.current = setInterval(() => setCount(count => count + 1), 1000);
+        return () => clearInterval(interval.current);
     });
     return (
         <div>
             <p>RefFunctionalComponent</p>
-            <input type="text" ref={inputRef} />
+            <p>Count - {count}</p>
+            <button onClick={() => clearInterval(interval.current)}>Stop Count</button>
         </div>
     )
 }
