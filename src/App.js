@@ -1,5 +1,4 @@
 import './App.css';
-import ParentComponent from './Components/useCallback/ParentComponent';
 // import StateCounterClass from './Components/useState/StateCounterClass'
 // import StateCounterFunctional from './Components/useState/StateCounterFunctional';
 // import EffectCounterClass from './Components/useEffect/EffectCounterClass';
@@ -13,6 +12,8 @@ import ParentComponent from './Components/useCallback/ParentComponent';
 // import Child1 from './Components/useReducer/Child1'
 // import Child2 from './Components/useReducer/Child2'
 // import Child3 from './Components/useReducer/Child3'
+// import ParentComponent from './Components/useCallback/ParentComponent';
+import MemoFunctionalComponent from './Components/useMemo/MemoFunctionalComponent';
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -36,7 +37,8 @@ function App() {
         <Child2 />
         <Child3 />
       </ContextProvider> */}
-      <ParentComponent />
+      {/* <ParentComponent /> */}
+      <MemoFunctionalComponent />
     </div>
   );
 }
