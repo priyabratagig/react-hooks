@@ -17,7 +17,8 @@ import "./App.css";
 // import RefFunctionalComponent from './Components/useRef/RefFunctionalComponent';
 // import RefClassComponent from './Components/useRef/RefClassComponent';
 // import DocumentTitle from "./Components/Custom Hooks/useDocumentTile/DocumentTitle";
-import Counter from "./Components/Custom Hooks/useCounter/Counter";
+// import Counter from "./Components/Custom Hooks/useCounter/Counter";
+import UserForm from "./Components/Custom Hooks/useInput/UserForm";
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -46,8 +47,9 @@ function App() {
       {/* <RefFunctionalComponent /> */}
       {/* <RefClassComponent /> */}
       {/* <DocumentTitle /> */}
-      <Counter initial={1} change={2} />
-      <Counter />
+      {/* <Counter initial={1} change={2} /> */}
+      {/* <Counter /> */}
+      <UserForm />
     </div>
   );
 }
