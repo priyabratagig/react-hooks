@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 // import StateCounterClass from './Components/useState/StateCounterClass'
 // import StateCounterFunctional from './Components/useState/StateCounterFunctional';
 // import EffectCounterClass from './Components/useEffect/EffectCounterClass';
@@ -16,7 +16,8 @@ import './App.css';
 // import MemoFunctionalComponent from './Components/useMemo/MemoFunctionalComponent';
 // import RefFunctionalComponent from './Components/useRef/RefFunctionalComponent';
 // import RefClassComponent from './Components/useRef/RefClassComponent';
-import DocumentTitle from './Components/Custom Hooks/useDocumentTile/DocumentTitle';
+// import DocumentTitle from "./Components/Custom Hooks/useDocumentTile/DocumentTitle";
+import Counter from "./Components/Custom Hooks/useCounter/Counter";
 
 // only call hook within react functional components at the top level
 // don't call hooks inside loops, condition, or nested functions
@@ -44,7 +45,9 @@ function App() {
       {/* <MemoFunctionalComponent /> */}
       {/* <RefFunctionalComponent /> */}
       {/* <RefClassComponent /> */}
-      <DocumentTitle />
+      {/* <DocumentTitle /> */}
+      <Counter initial={1} change={2} />
+      <Counter />
     </div>
   );
 }
